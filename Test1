@@ -154,7 +154,7 @@ Spawner.runEntity = function(entityTable)
     end
 
     -- Spawn
-
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
     local entityModel = entityTable.Model:Clone()
     local startNodeIndex = entityTable.Config.BackwardsMovement and #entityNodes or 1
     local startNodeOffset = entityTable.Config.BackwardsMovement and -50 or 50
@@ -165,7 +165,7 @@ Spawner.runEntity = function(entityTable)
     entityModel:SetPrimaryPartCFrame(entityNodes[startNodeIndex].CFrame * CFrame.new(0, 0, startNodeOffset) + Vector3.new(0, 7 + entityTable.Config.HeightOffset, 0))
     entityModel.Parent = workspace
     task.spawn(entityTable.Debug.OnEntitySpawned)
-
+end
     -- Mute entity on spawn
 
     if CG:FindFirstChild("JumpscareGui") or (Plr.PlayerGui.MainUI.Death.HelpfulDialogue.Visible and not Plr.PlayerGui.MainUI.DeathPanelDead.Visible) then
